@@ -5,10 +5,34 @@
     <title>Shop Front-end</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css} "/>
 </head>
 
 <body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Store Front-end</a>
+</nav>
+
 <p>Welcome to our store!</p>
+
+<div class="container">
+    <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>orange juice</td>
+            <td>drink</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 
 </html>
