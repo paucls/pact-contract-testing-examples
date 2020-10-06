@@ -9,30 +9,32 @@
 </head>
 
 <body>
-
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Store Front-end</a>
+    <a class="navbar-brand" href="#">Shop Front-end</a>
 </nav>
 
-<p>Welcome to our store!</p>
-
 <div class="container">
-    <table class="table table-bordered table-responsive">
+    <h2>Products</h2>
+
+    <table class="table">
         <thead>
         <tr>
             <th>Name</th>
             <th>Type</th>
+            <th/>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>orange juice</td>
-            <td>drink</td>
+        <tr th:each="product,iterStat : ${products}" th:class="${iterStat.odd}? 'odd'">
+            <td th:text="${product.name}">a name</td>
+            <td th:text="${product.type}">a type</td>
+            <td>
+                <a th:href="@{'/products/' + ${product.id}}">See more!</a>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
 
 </body>
-
 </html>
