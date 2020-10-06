@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Shop Front-end</title>
+    <title>Products</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css} "/>
@@ -29,7 +29,7 @@
             <td th:text="${product.name}">a name</td>
             <td th:text="${product.type}">a type</td>
             <td>
-                <a th:href="@{'/products/' + ${product.id}}">See more!</a>
+                <a th:href="@{'/products/' + ${product.id}}" class="btn btn-secondary btn-sm">See more!</a>
             </td>
         </tr>
         </tbody>
