@@ -1,4 +1,4 @@
-package paucls.pactworkshop.frontend.api
+package paucls.pactworkshop.frontend.web
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
