@@ -12,12 +12,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import paucls.pactworkshop.frontend.client.CatalogClient
 
 
 @SpringBootTest
-@ExtendWith(SpringExtension::class, PactConsumerTestExt::class)
+@ExtendWith(PactConsumerTestExt::class)
 @PactTestFor(providerName = "catalog", port = "8081")
 class CatalogClientConsumerPactTest {
 
