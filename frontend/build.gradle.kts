@@ -12,7 +12,7 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
-	mavenCentral()
+	jcenter()
 }
 
 extra["springCloudVersion"] = "Hoxton.SR8"
@@ -27,6 +27,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+	testImplementation("au.com.dius.pact.consumer:junit5:4.1.0")
 }
 
 dependencyManagement {
