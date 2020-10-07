@@ -28,8 +28,8 @@ class CatalogClientConsumerPactTest {
         val headers = mapOf("Content-Type" to "application/json")
 
         val responseBody = PactDslJsonArray
-                .arrayEachLike()
-                .stringType("id", "123")
+                .arrayMinLike(1)
+                .integerType("id", 123)
                 .stringType("name", "Mastercard")
                 .stringType("type", "CREDIT_CARD")
                 .close()
