@@ -2,6 +2,7 @@ package paucls.pactworkshop.frontend
 
 import au.com.dius.pact.consumer.MockServer
 import au.com.dius.pact.consumer.dsl.PactDslJsonArray
+import au.com.dius.pact.consumer.dsl.PactDslJsonBody
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt
 import au.com.dius.pact.consumer.junit5.PactTestFor
@@ -20,18 +21,18 @@ import paucls.pactworkshop.frontend.client.CatalogClient
 @PactTestFor(providerName = "catalog", port = "8081")
 class CatalogClientConsumerPactTest {
 
+    private val headers = mapOf("Content-Type" to "application/json")
+
     @Autowired
     private lateinit var catalogClient: CatalogClient
 
     @Pact(consumer = "frontend", provider = "catalog")
     fun pact_get_all_products_when_products_exist(builder: PactDslWithProvider): RequestResponsePact {
-        val headers = mapOf("Content-Type" to "application/json")
-
         val responseBody = PactDslJsonArray
                 .arrayMinLike(1)
                 .integerType("id", 123)
-                .stringType("name", "Mastercard")
                 .stringType("type", "CREDIT_CARD")
+                .stringType("name", "Mastercard")
                 .close()
 
         return builder
@@ -55,5 +56,35 @@ class CatalogClientConsumerPactTest {
         assertThat(products[0].id).isEqualTo(123)
         assertThat(products[0].name).isEqualTo("Mastercard")
         assertThat(products[0].type).isEqualTo("CREDIT_CARD")
+    }
+
+    @Pact(consumer = "frontend", provider = "catalog")
+    fun pact_get_one_product_when_product_exists(builder: PactDslWithProvider): RequestResponsePact {
+        val responseBody = PactDslJsonBody()
+                .integerType("id", 10)
+                .stringType("type", "CREDIT_CARD")
+                .stringType("name", "28 Degrees")
+                .close()
+
+        return builder
+                .given("product with id 10 exists")
+                .uponReceiving("a request to get one product")
+                .method("GET")
+                .matchPath("/products/10")
+                .willRespondWith()
+                .status(200)
+                .headers(headers)
+                .body(responseBody)
+                .toPact()
+    }
+
+    @PactTestFor(pactMethod = "pact_get_one_product_when_product_exists")
+    @Test
+    fun get_one_product_when_product_exists(mockServer: MockServer) {
+        val product = catalogClient.getProduct(10)
+
+        assertThat(product.id).isEqualTo(10)
+        assertThat(product.type).isEqualTo("CREDIT_CARD")
+        assertThat(product.name).isEqualTo("28 Degrees")
     }
 }

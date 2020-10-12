@@ -41,4 +41,8 @@ class FrontendPactProviderTest {
                 listOf(Product(id = 123, name = "Mastercard", type = "CREDIT_CARD")))
     }
 
+    @State("product with id 10 exists")
+    fun product_with_id_10_exists() {
+    }
+
 }

@@ -7,6 +7,68 @@
   },
   "interactions": [
     {
+      "description": "a request to get one product",
+      "request": {
+        "method": "GET",
+        "path": "/products/10",
+        "matchingRules": {
+          "path": {
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "/products/10"
+              }
+            ],
+            "combine": "AND"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "28 Degrees",
+          "id": 10,
+          "type": "CREDIT_CARD"
+        },
+        "matchingRules": {
+          "body": {
+            "$.id": {
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.type": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.name": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "product with id 10 exists"
+        }
+      ]
+    },
+    {
       "description": "a request to get all products",
       "request": {
         "method": "GET",
@@ -54,7 +116,7 @@
               ],
               "combine": "AND"
             },
-            "$[*].name": {
+            "$[*].type": {
               "matchers": [
                 {
                   "match": "type"
@@ -62,7 +124,7 @@
               ],
               "combine": "AND"
             },
-            "$[*].type": {
+            "$[*].name": {
               "matchers": [
                 {
                   "match": "type"
