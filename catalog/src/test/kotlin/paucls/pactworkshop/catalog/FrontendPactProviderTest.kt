@@ -43,6 +43,8 @@ class FrontendPactProviderTest {
 
     @State("product with id 10 exists")
     fun product_with_id_10_exists() {
+        whenever(productsServiceMock.getProduct(10)).thenReturn(
+                Product(id = 10, name = "28 Degrees", type = "CREDIT_CARD")
+        )
     }
-
 }
