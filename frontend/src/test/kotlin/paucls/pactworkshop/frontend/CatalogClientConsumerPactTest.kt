@@ -87,4 +87,23 @@ class CatalogClientConsumerPactTest {
         assertThat(product.type).isEqualTo("CREDIT_CARD")
         assertThat(product.name).isEqualTo("28 Degrees")
     }
+
+    @Pact(consumer = "frontend", provider = "catalog")
+    fun pact_favourite_a_product(builder: PactDslWithProvider): RequestResponsePact {
+        return builder
+                .given("product with id 10 exists")
+                .uponReceiving("a request to favourite a product")
+                .method("POST")
+                .matchPath("/products/10/favourite")
+                .willRespondWith()
+                .status(204)
+                .headers(headers)
+                .toPact()
+    }
+
+    @PactTestFor(pactMethod = "pact_favourite_a_product")
+    @Test
+    fun favourite_a_product(mockServer: MockServer) {
+        catalogClient.favouriteProduct(10)
+    }
 }

@@ -14,4 +14,6 @@ interface CatalogClient {
     @RequestMapping(method = [RequestMethod.GET], value = ["/products/{id}"])
     fun getProduct(@PathVariable("id") id: Int): Product
 
+    @RequestMapping(method = [RequestMethod.POST], value = ["/products/{id}/favourite"])
+    fun favouriteProduct(@PathVariable("id") id: Int)
 }
