@@ -1,5 +1,7 @@
 # Pact Workshop
 
+![Services](services.jpg)
+
 ## Run
 In terminal 1 start the provider service
 ```
