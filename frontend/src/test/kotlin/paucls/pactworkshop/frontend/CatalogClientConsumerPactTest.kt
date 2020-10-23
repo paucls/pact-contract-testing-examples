@@ -97,7 +97,6 @@ class CatalogClientConsumerPactTest {
                 .matchPath("/products/10/favourite")
                 .willRespondWith()
                 .status(204)
-                .headers(headers)
                 .toPact()
     }
 

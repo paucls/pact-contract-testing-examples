@@ -16,4 +16,8 @@ class ProductsService {
     fun getProduct(id: Int): Product {
         return products[id]
     }
+
+    fun favouriteProduct(id: Int) {
+        TODO("Not yet implemented")
+    }
 }

@@ -7,6 +7,32 @@
   },
   "interactions": [
     {
+      "description": "a request to favourite a product",
+      "request": {
+        "method": "POST",
+        "path": "/products/10/favourite",
+        "matchingRules": {
+          "path": {
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "/products/10/favourite"
+              }
+            ],
+            "combine": "AND"
+          }
+        }
+      },
+      "response": {
+        "status": 204
+      },
+      "providerStates": [
+        {
+          "name": "product with id 10 exists"
+        }
+      ]
+    },
+    {
       "description": "a request to get one product",
       "request": {
         "method": "GET",
