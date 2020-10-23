@@ -13,6 +13,8 @@ import org.junit.jupiter.api.TestTemplate
 import org.junit.jupiter.api.extension.ExtendWith
 import paucls.pactworkshop.catalog.api.ProductsController
 import paucls.pactworkshop.catalog.app.Product
+import paucls.pactworkshop.catalog.app.ProductAvailability.InStock
+import paucls.pactworkshop.catalog.app.ProductAvailability.OutOfStock
 import paucls.pactworkshop.catalog.app.ProductsService
 
 
@@ -38,13 +40,13 @@ class FrontendPactProviderTest {
     @State("products exist")
     fun products_exists() {
         whenever(productsServiceMock.getAllProducts()).thenReturn(
-                listOf(Product(id = 123, name = "Mastercard", type = "CREDIT_CARD")))
+                listOf(Product(id = 123, name = "Mastercard", type = "CREDIT_CARD", availability = InStock)))
     }
 
     @State("product with id 10 exists")
     fun product_with_id_10_exists() {
         whenever(productsServiceMock.getProduct(10)).thenReturn(
-                Product(id = 10, name = "28 Degrees", type = "CREDIT_CARD")
+                Product(id = 10, name = "28 Degrees", type = "CREDIT_CARD", availability = OutOfStock)
         )
     }
 }

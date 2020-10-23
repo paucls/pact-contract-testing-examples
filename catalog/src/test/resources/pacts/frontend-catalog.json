@@ -57,6 +57,7 @@
         "body": {
           "name": "28 Degrees",
           "id": 10,
+          "availability": "OutOfStock",
           "type": "CREDIT_CARD"
         },
         "matchingRules": {
@@ -120,6 +121,7 @@
           {
             "name": "Mastercard",
             "id": 123,
+            "availability": "InStock",
             "type": "CREDIT_CARD"
           }
         ],
