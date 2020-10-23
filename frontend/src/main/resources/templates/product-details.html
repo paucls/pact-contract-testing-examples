@@ -16,6 +16,9 @@
 <div class="container">
     <h2>Product Details</h2>
 
+    <span class="badge badge-warning"
+          th:if="${product.availability.name() == 'OutOfStock'}">Out Of Stock</span>
+
     <form>
         <div class="form-group row">
             <label for="productId" class="col-sm-2 col-form-label">ID</label>

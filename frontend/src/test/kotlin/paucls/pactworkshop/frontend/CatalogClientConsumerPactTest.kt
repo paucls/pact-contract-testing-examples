@@ -14,6 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import paucls.pactworkshop.frontend.client.CatalogClient
+import paucls.pactworkshop.frontend.client.ProductAvailability.InStock
+import paucls.pactworkshop.frontend.client.ProductAvailability.OutOfStock
 
 
 @SpringBootTest
@@ -33,6 +35,7 @@ class CatalogClientConsumerPactTest {
                 .integerType("id", 123)
                 .stringType("type", "CREDIT_CARD")
                 .stringType("name", "Mastercard")
+                .stringValue("availability", "InStock")
                 .close()
 
         return builder
@@ -56,6 +59,7 @@ class CatalogClientConsumerPactTest {
         assertThat(products[0].id).isEqualTo(123)
         assertThat(products[0].name).isEqualTo("Mastercard")
         assertThat(products[0].type).isEqualTo("CREDIT_CARD")
+        assertThat(products[0].availability).isEqualTo(InStock)
     }
 
     @Pact(consumer = "frontend", provider = "catalog")
@@ -64,6 +68,7 @@ class CatalogClientConsumerPactTest {
                 .integerType("id", 10)
                 .stringType("type", "CREDIT_CARD")
                 .stringType("name", "28 Degrees")
+                .stringValue("availability", "OutOfStock")
                 .close()
 
         return builder
@@ -86,6 +91,7 @@ class CatalogClientConsumerPactTest {
         assertThat(product.id).isEqualTo(10)
         assertThat(product.type).isEqualTo("CREDIT_CARD")
         assertThat(product.name).isEqualTo("28 Degrees")
+        assertThat(product.availability).isEqualTo(OutOfStock)
     }
 
     @Pact(consumer = "frontend", provider = "catalog")
