@@ -1,0 +1,88 @@
+{
+  "consumer": {
+    "name": "catalog"
+  },
+  "provider": {
+    "name": "inventory"
+  },
+  "messages": [
+    {
+      "description": "product stock changed message",
+      "metaData": {
+        "contentType": "application/json"
+      },
+      "contents": {
+        "productId": 123,
+        "isInStock": true
+      },
+      "providerStates": [
+        {
+          "name": "a product goes out of stock or is back in stock"
+        }
+      ],
+      "matchingRules": {
+        "body": {
+          "$.productId": {
+            "matchers": [
+              {
+                "match": "integer"
+              }
+            ],
+            "combine": "AND"
+          },
+          "$.isInStock": {
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ],
+            "combine": "AND"
+          }
+        }
+      }
+    },
+    {
+      "description": "order placed message",
+      "metaData": {
+        "contentType": "application/json"
+      },
+      "contents": {
+        "isInStock": true,
+        "productId": 123
+      },
+      "providerStates": [
+        {
+          "name": "an order has been placed"
+        }
+      ],
+      "matchingRules": {
+        "body": {
+          "$.productId": {
+            "matchers": [
+              {
+                "match": "integer"
+              }
+            ],
+            "combine": "AND"
+          },
+          "$.isInStock": {
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ],
+            "combine": "AND"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "4.1.9"
+    }
+  }
+}
