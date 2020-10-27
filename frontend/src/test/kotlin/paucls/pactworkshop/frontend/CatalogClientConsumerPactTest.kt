@@ -28,7 +28,7 @@ class CatalogClientConsumerPactTest {
     @Autowired
     private lateinit var catalogClient: CatalogClient
 
-    @Pact(consumer = "frontend", provider = "catalog")
+    @Pact(consumer = "frontend")
     fun pact_get_all_products_when_products_exist(builder: PactDslWithProvider): RequestResponsePact {
         val responseBody = PactDslJsonArray
                 .arrayMinLike(1)
@@ -62,7 +62,7 @@ class CatalogClientConsumerPactTest {
         assertThat(products[0].availability).isEqualTo(InStock)
     }
 
-    @Pact(consumer = "frontend", provider = "catalog")
+    @Pact(consumer = "frontend")
     fun pact_get_one_product_when_product_exists(builder: PactDslWithProvider): RequestResponsePact {
         val responseBody = PactDslJsonBody()
                 .integerType("id", 10)
@@ -94,7 +94,7 @@ class CatalogClientConsumerPactTest {
         assertThat(product.availability).isEqualTo(OutOfStock)
     }
 
-    @Pact(consumer = "frontend", provider = "catalog")
+    @Pact(consumer = "frontend")
     fun pact_favourite_a_product(builder: PactDslWithProvider): RequestResponsePact {
         return builder
                 .given("product with id 10 exists")
