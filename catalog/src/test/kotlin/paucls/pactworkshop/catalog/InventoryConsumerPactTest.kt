@@ -17,7 +17,7 @@ import paucls.pactworkshop.catalog.messaging.ProductStockChangedDto
 
 @ExtendWith(PactConsumerTestExt::class)
 @PactTestFor(providerName = "inventory", providerType = ProviderType.ASYNCH)
-class InventoryPactConsumerTest {
+class InventoryConsumerPactTest {
 
     @Pact(consumer = "catalog")
     fun pact_product_stock_changed(builder: MessagePactBuilder): MessagePact {

@@ -1,0 +1,6 @@
+package paucls.pactworkshop.inventory.messaging
+
+data class ProductStockChangedDto(
+        val productId: Int,
+        val isInStock: Boolean
+)
