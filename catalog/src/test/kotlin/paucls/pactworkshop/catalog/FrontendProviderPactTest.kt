@@ -20,7 +20,7 @@ import paucls.pactworkshop.catalog.app.ProductsService
 
 @Provider("catalog")
 @PactFolder("pacts")
-class FrontendPactProviderTest {
+class FrontendProviderPactTest {
 
     private val productsServiceMock: ProductsService = mock()
 
