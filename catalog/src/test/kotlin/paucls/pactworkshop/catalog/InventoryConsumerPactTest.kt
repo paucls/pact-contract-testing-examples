@@ -10,14 +10,21 @@ import au.com.dius.pact.core.model.messaging.Message
 import au.com.dius.pact.core.model.messaging.MessagePact
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import paucls.pactworkshop.catalog.app.SyncProductStockService
 import paucls.pactworkshop.catalog.messaging.ProductStockChangedDto
+import paucls.pactworkshop.catalog.messaging.ProductStockChangedHandler
 
 @ExtendWith(PactConsumerTestExt::class)
 @PactTestFor(providerName = "inventory", providerType = ProviderType.ASYNCH)
 class InventoryConsumerPactTest {
+
+    private val syncProductStockServiceMock: SyncProductStockService = mock()
+    private val handler = ProductStockChangedHandler(syncProductStockServiceMock)
 
     @Pact(consumer = "catalog")
     fun pact_product_stock_changed(builder: MessagePactBuilder): MessagePact {
@@ -39,7 +46,11 @@ class InventoryConsumerPactTest {
     @Test
     fun `should handle product stock changed message`(messages: List<Message> ) {
         val productStockChangedDto: ProductStockChangedDto = jacksonObjectMapper().readValue(messages[0].contentsAsBytes())
-        assertThat(productStockChangedDto.productId).isEqualTo(123)
-        assertThat(productStockChangedDto.isInStock).isTrue()
+
+        handler.handleMessage(productStockChangedDto)
+
+        verify(syncProductStockServiceMock).syncProductStock(
+                productId = 123,
+                isInStock = true)
     }
 }
