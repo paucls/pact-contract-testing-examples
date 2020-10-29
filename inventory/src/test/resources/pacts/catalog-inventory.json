@@ -40,41 +40,6 @@
           }
         }
       }
-    },
-    {
-      "description": "order placed message",
-      "metaData": {
-        "contentType": "application/json"
-      },
-      "contents": {
-        "isInStock": true,
-        "productId": 123
-      },
-      "providerStates": [
-        {
-          "name": "an order has been placed"
-        }
-      ],
-      "matchingRules": {
-        "body": {
-          "$.productId": {
-            "matchers": [
-              {
-                "match": "integer"
-              }
-            ],
-            "combine": "AND"
-          },
-          "$.isInStock": {
-            "matchers": [
-              {
-                "match": "type"
-              }
-            ],
-            "combine": "AND"
-          }
-        }
-      }
     }
   ],
   "metadata": {
