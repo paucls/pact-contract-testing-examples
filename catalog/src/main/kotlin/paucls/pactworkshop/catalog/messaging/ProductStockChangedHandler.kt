@@ -14,7 +14,7 @@ import paucls.pactworkshop.catalog.app.SyncProductStockService
 @Component
 class ProductStockChangedHandler(private val syncProductStockService: SyncProductStockService) {
 
-    var logger: Logger = LogManager.getLogger(ProductStockChangedHandler::class.java)
+    private val logger: Logger = LogManager.getLogger(ProductStockChangedHandler::class.java)
 
     @RabbitListener(
             bindings = [(QueueBinding(
