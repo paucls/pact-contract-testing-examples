@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 
-@FeignClient(name = "catalog", url = "localhost:8081")
+@FeignClient(name = "catalog", url = "\${CATALOG_BASE_URL}")
 interface CatalogClient {
 
     @RequestMapping(method = [RequestMethod.GET], value = ["/products"])

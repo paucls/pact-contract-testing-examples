@@ -20,7 +20,7 @@ import paucls.pactworkshop.frontend.client.ProductAvailability.OutOfStock
 
 @SpringBootTest
 @ExtendWith(PactConsumerTestExt::class)
-@PactTestFor(providerName = "catalog", port = "8081")
+@PactTestFor(providerName = "catalog", port = "9081")
 class CatalogClientConsumerPactTest {
 
     private val headers = mapOf("Content-Type" to "application/json")
