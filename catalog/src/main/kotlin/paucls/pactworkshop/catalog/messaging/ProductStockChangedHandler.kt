@@ -8,11 +8,11 @@ import org.springframework.amqp.rabbit.annotation.Queue
 import org.springframework.amqp.rabbit.annotation.QueueBinding
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.stereotype.Component
-import paucls.pactworkshop.catalog.app.SyncProductStockService
+import paucls.pactworkshop.catalog.app.ProductService
 
 
 @Component
-class ProductStockChangedHandler(private val syncProductStockService: SyncProductStockService) {
+class ProductStockChangedHandler(private val productService: ProductService) {
 
     private val logger: Logger = LogManager.getLogger(ProductStockChangedHandler::class.java)
 
@@ -25,6 +25,6 @@ class ProductStockChangedHandler(private val syncProductStockService: SyncProduc
     fun handleMessage(message: ProductStockChangedDto) {
         logger.info("Received product stock changed $message")
 
-        syncProductStockService.syncProductStock(message.productId, message.isInStock)
+        productService.syncProductStock(message.productId, message.isInStock)
     }
 }

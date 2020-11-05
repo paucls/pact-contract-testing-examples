@@ -14,6 +14,14 @@ class ProductService(
         return productRepository.getProduct(id)
     }
 
+    fun syncProductStock(productId: Int, isInStock: Boolean) {
+        val product = productRepository.getProduct(productId)
+
+        product.availability = if (isInStock) ProductAvailability.InStock else ProductAvailability.OutOfStock
+
+        productRepository.save(product)
+    }
+
     fun favouriteProduct(id: Int) {
         TODO("Not yet implemented")
     }
