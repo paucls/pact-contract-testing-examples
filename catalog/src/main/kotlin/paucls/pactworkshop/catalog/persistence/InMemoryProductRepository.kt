@@ -5,6 +5,9 @@ import paucls.pactworkshop.catalog.app.Product
 import paucls.pactworkshop.catalog.app.ProductAvailability
 import paucls.pactworkshop.catalog.app.ProductRepository
 
+/**
+ * Fake in memory repository implementation for demo purposes
+ */
 @Repository
 class InMemoryProductRepository : ProductRepository {
 
@@ -19,5 +22,8 @@ class InMemoryProductRepository : ProductRepository {
 
     override fun getProduct(id: Int): Product {
         return products[id]
+    }
+
+    override fun save(product: Product) {
     }
 }

@@ -4,7 +4,7 @@ data class Product(
         val id: Int,
         val name: String,
         val type: String,
-        val availability: ProductAvailability)
+        var availability: ProductAvailability)
 
 enum class ProductAvailability {
     InStock,

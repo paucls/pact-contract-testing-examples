@@ -11,18 +11,18 @@ import com.nhaarman.mockitokotlin2.whenever
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestTemplate
 import org.junit.jupiter.api.extension.ExtendWith
-import paucls.pactworkshop.catalog.api.ProductsController
+import paucls.pactworkshop.catalog.api.ProductController
 import paucls.pactworkshop.catalog.app.Product
 import paucls.pactworkshop.catalog.app.ProductAvailability.InStock
 import paucls.pactworkshop.catalog.app.ProductAvailability.OutOfStock
-import paucls.pactworkshop.catalog.app.ProductsService
+import paucls.pactworkshop.catalog.app.ProductService
 
 
 @Provider("catalog")
 @PactFolder("pacts")
 class FrontendProviderPactTest {
 
-    private val productsServiceMock: ProductsService = mock()
+    private val productServiceMock: ProductService = mock()
 
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider::class)
@@ -33,19 +33,19 @@ class FrontendProviderPactTest {
     @BeforeEach
     fun before(context: PactVerificationContext) {
         val testTarget = MockMvcTestTarget()
-        testTarget.setControllers(ProductsController(productsServiceMock))
+        testTarget.setControllers(ProductController(productServiceMock))
         context.target = testTarget
     }
 
     @State("products exist")
     fun products_exists() {
-        whenever(productsServiceMock.getAllProducts()).thenReturn(
+        whenever(productServiceMock.getAllProducts()).thenReturn(
                 listOf(Product(id = 123, name = "Mastercard", type = "CREDIT_CARD", availability = InStock)))
     }
 
     @State("product with id 10 exists")
     fun product_with_id_10_exists() {
-        whenever(productsServiceMock.getProduct(10)).thenReturn(
+        whenever(productServiceMock.getProduct(10)).thenReturn(
                 Product(id = 10, name = "28 Degrees", type = "CREDIT_CARD", availability = OutOfStock)
         )
     }

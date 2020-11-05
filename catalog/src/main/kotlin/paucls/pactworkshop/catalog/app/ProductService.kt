@@ -3,7 +3,7 @@ package paucls.pactworkshop.catalog.app
 import org.springframework.stereotype.Service
 
 @Service
-class ProductsService(
+class ProductService(
         private val productRepository: ProductRepository
 ) {
     fun getAllProducts(): List<Product> {
