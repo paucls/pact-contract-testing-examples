@@ -2,17 +2,16 @@
 
 ![Services](services.jpg)
 
-## Run
+## Running the demo application
+
 In terminal 1 start the provider service
 ```
-cd catalog
-./gradlew bootRun
+$ catalog/gradlew -p catalog bootRun
 ```
 
 In terminal 2 start the consumer service
 ```
-cd frontend
-./gradlew bootRun
+$ frontend/gradlew -p frontend bootRun
 ```
 
 Open in the browser http://localhost:8080/

@@ -11,7 +11,7 @@ import paucls.pactworkshop.frontend.client.CatalogClient
 class ProductsController(private val catalogClient: CatalogClient) {
 
     @GetMapping("/")
-    fun greeting(model: Model): String {
+    fun products(model: Model): String {
         val products = catalogClient.getAllProducts()
         model.addAttribute("products", products)
         return "products"
