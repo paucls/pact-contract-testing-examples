@@ -1,15 +1,27 @@
-# Pact Workshop
+# Pact Contract Testing Examples
 
-![Services](services.jpg)
+A sample micro-services application that demonstrates how Pact Contract tests work for REST as well as messaging interactions. Services implemented in Kotlin + Spring Boot.
+
+![Services](services.svg)
 
 ## Running the demo application
 
-In terminal 1 start the provider service
+In terminal 1 start RabbitMQ
+```
+$ docker-compose up
+```
+
+In terminal 2 start the inventory provider service
+```
+$ inventory/gradlew -p inventory bootRun
+```
+
+In terminal 3 start the catalog consumer/provider service
 ```
 $ catalog/gradlew -p catalog bootRun
 ```
 
-In terminal 2 start the consumer service
+In terminal 4 start the frontend consumer service
 ```
 $ frontend/gradlew -p frontend bootRun
 ```
