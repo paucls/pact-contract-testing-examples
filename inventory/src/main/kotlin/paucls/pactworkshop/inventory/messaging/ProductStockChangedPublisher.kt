@@ -19,7 +19,7 @@ class ProductStockChangedPublisher(
     private val logger: Logger = LogManager.getLogger(ProductStockChangedPublisher::class.java)
 
     fun publish(event: ProductStockChangedDto) {
-        logger.info("Publishing product stock changed event ...", event)
+        logger.info("Publishing product stock changed event $event")
 
         rabbit.convertAndSend(
                 EXCHANGE,
