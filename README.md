@@ -33,4 +33,5 @@ Open in the browser http://localhost:8080/
 - https://docs.pact.io/implementation_guides/jvm/provider/junit5spring
 - https://kreuzwerker.de/post/migrating-pact-contract-tests-from-junit4-to-junit5
 - https://github.com/tinexw/cdc-with-pact/tree/junit5
+- https://rieckpil.de/testing-your-spring-resttemplate-with-restclienttest
 

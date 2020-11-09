@@ -24,6 +24,7 @@ dependencies {
 	implementation("org.webjars:bootstrap:4.5.2")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.+")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
