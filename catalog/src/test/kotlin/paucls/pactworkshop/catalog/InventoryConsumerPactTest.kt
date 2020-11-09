@@ -15,7 +15,7 @@ import com.nhaarman.mockitokotlin2.verify
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import paucls.pactworkshop.catalog.app.ProductService
-import paucls.pactworkshop.catalog.messaging.ProductStockChangedDto
+import paucls.pactworkshop.catalog.messaging.ProductInventoryChangedDto
 import paucls.pactworkshop.catalog.messaging.ProductStockChangedHandler
 
 @ExtendWith(PactConsumerTestExt::class)
@@ -26,30 +26,30 @@ class InventoryConsumerPactTest {
     private val handler = ProductStockChangedHandler(productServiceMock)
 
     @Pact(consumer = "catalog")
-    fun pact_product_stock_changed(builder: MessagePactBuilder): MessagePact {
+    fun pact_product_inventory_changed(builder: MessagePactBuilder): MessagePact {
         val body = PactDslJsonBody()
                 .integerType("productId", 123)
-                .booleanType("isInStock", true)
+                .integerType("quantity", 100)
 
         val metadata = HashMap<String, String>()
         metadata["contentType"] = "application/json"
 
-        return builder.given("a product goes out of stock or is back in stock")
-                .expectsToReceive("product stock changed message")
+        return builder.given("a product inventory level has changed")
+                .expectsToReceive("product inventory changed message")
                 .withMetadata(metadata)
                 .withContent(body)
                 .toPact()
     }
 
-    @PactTestFor(pactMethod = "pact_product_stock_changed")
+    @PactTestFor(pactMethod = "pact_product_inventory_changed")
     @Test
-    fun `should handle product stock changed message`(messages: List<Message> ) {
-        val productStockChangedDto: ProductStockChangedDto = jacksonObjectMapper().readValue(messages[0].contentsAsBytes())
+    fun `should handle product inventory changed message`(messages: List<Message> ) {
+        val productInventoryChangedDto: ProductInventoryChangedDto = jacksonObjectMapper().readValue(messages[0].contentsAsBytes())
 
-        handler.handleMessage(productStockChangedDto)
+        handler.handleMessage(productInventoryChangedDto)
 
-        verify(productServiceMock).syncProductStock(
+        verify(productServiceMock).syncProductAvailability(
                 productId = 123,
-                isInStock = true)
+                quantity = 100)
     }
 }

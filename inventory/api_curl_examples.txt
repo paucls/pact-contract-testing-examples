@@ -1,3 +1,2 @@
 // Place Order
-curl -d '{"productId":1, "quantity": 0}' -H "Content-Type: application/json" -X PUT http://localhost:8082/productstocks/1
-
+curl -d '{"productId":2, "locationId": "IE", "quantity": 100}' -H "Content-Type: application/json" -X POST http://localhost:8082/product_levels/adjust

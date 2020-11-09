@@ -1,33 +1,24 @@
 package paucls.pactworkshop.inventory.api
 
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
-import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
-import paucls.pactworkshop.inventory.messaging.ProductStockChangedDto
-import paucls.pactworkshop.inventory.messaging.ProductStockChangedPublisher
+import paucls.pactworkshop.inventory.app.AdjustProductLevelCommand
+import paucls.pactworkshop.inventory.app.InventoryService
 
 @RestController
-class InventoryController(private val productStockChangedPublisher: ProductStockChangedPublisher) {
+class InventoryController(private val inventoryService: InventoryService) {
 
     @RequestMapping("/")
     fun index(): String = "Inventory service!"
 
-    @RequestMapping(value = ["/productstocks/{id}"], method = [(RequestMethod.PUT)])
-    fun updateProductStock(@PathVariable id: Int,
-                           @RequestBody productStock: ProductStock): ProductStock {
-        // call an app server ...
-        productStockChangedPublisher.publish(ProductStockChangedDto(
-                productId = id,
-                isInStock = productStock.quantity > 0))
-        return productStock
+    @RequestMapping(value = ["/product_levels/adjust"], method = [(RequestMethod.POST)])
+    fun adjustProductLevel(@RequestBody c: AdjustProductLevelCommand): ResponseEntity<Unit> {
+        inventoryService.adjustProductLevel(c)
+        return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 }
 
-data class ProductStock(
-        val productId: Int,
-        val quantity: Int
-)

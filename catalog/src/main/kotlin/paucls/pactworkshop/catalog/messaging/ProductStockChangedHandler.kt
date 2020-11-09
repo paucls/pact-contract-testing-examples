@@ -18,13 +18,13 @@ class ProductStockChangedHandler(private val productService: ProductService) {
 
     @RabbitListener(
             bindings = [(QueueBinding(
-                    value = Queue(value = Queues.PRODUCT_STOCK_CHANGED, durable = "true"),
+                    value = Queue(value = Queues.PRODUCT_INVENTORY_CHANGED, durable = "true"),
                     exchange = Exchange(EXCHANGE, type = ExchangeTypes.TOPIC, durable = "true", autoDelete = "false"),
-                    key = [RoutingKeys.PRODUCT_STOCK_CHANGED]))]
+                    key = [RoutingKeys.PRODUCT_INVENTORY_CHANGED]))]
     )
-    fun handleMessage(message: ProductStockChangedDto) {
+    fun handleMessage(message: ProductInventoryChangedDto) {
         logger.info("Received product stock changed $message")
 
-        productService.syncProductStock(message.productId, message.isInStock)
+        productService.syncProductAvailability(message.productId, message.quantity)
     }
 }

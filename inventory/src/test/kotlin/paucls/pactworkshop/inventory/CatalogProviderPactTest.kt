@@ -11,7 +11,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestTemplate
 import org.junit.jupiter.api.extension.ExtendWith
-import paucls.pactworkshop.inventory.messaging.ProductStockChangedDto
+import paucls.pactworkshop.inventory.messaging.ProductInventoryChangedDto
 
 
 @Provider("inventory")
@@ -36,7 +36,7 @@ class CatalogProviderPactTest {
 
     @PactVerifyProvider("product stock changed message")
     fun verifyEntitiesCreatedMessage(): String {
-        val message = ProductStockChangedDto(
+        val message = ProductInventoryChangedDto(
                 productId = 10,
                 isInStock = true)
         return jacksonObjectMapper().writeValueAsString(message)

@@ -14,10 +14,10 @@ class ProductService(
         return productRepository.getProduct(id)
     }
 
-    fun syncProductStock(productId: Int, isInStock: Boolean) {
+    fun syncProductAvailability(productId: Int, quantity: Int) {
         val product = productRepository.getProduct(productId)
 
-        product.availability = if (isInStock) ProductAvailability.InStock else ProductAvailability.OutOfStock
+        product.availability = if (quantity > 0) ProductAvailability.InStock else ProductAvailability.OutOfStock
 
         productRepository.save(product)
     }

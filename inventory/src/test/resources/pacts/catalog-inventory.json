@@ -7,17 +7,17 @@
   },
   "messages": [
     {
-      "description": "product stock changed message",
+      "description": "product inventory changed message",
       "metaData": {
         "contentType": "application/json"
       },
       "contents": {
-        "productId": 123,
-        "isInStock": true
+        "quantity": 100,
+        "productId": 123
       },
       "providerStates": [
         {
-          "name": "a product goes out of stock or is back in stock"
+          "name": "a product inventory level has changed"
         }
       ],
       "matchingRules": {
@@ -30,10 +30,10 @@
             ],
             "combine": "AND"
           },
-          "$.isInStock": {
+          "$.quantity": {
             "matchers": [
               {
-                "match": "type"
+                "match": "integer"
               }
             ],
             "combine": "AND"
