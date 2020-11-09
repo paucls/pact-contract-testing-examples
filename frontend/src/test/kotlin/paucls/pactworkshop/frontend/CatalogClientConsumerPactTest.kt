@@ -9,6 +9,7 @@ import au.com.dius.pact.consumer.junit5.PactTestFor
 import au.com.dius.pact.core.model.RequestResponsePact
 import au.com.dius.pact.core.model.annotations.Pact
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -94,7 +95,7 @@ class CatalogClientConsumerPactTest {
         assertThat(product.availability).isEqualTo(OutOfStock)
     }
 
-    @Pact(consumer = "frontend")
+//    @Pact(consumer = "frontend")
     fun pact_favourite_a_product(builder: PactDslWithProvider): RequestResponsePact {
         return builder
                 .given("product with id 10 exists")
@@ -106,8 +107,8 @@ class CatalogClientConsumerPactTest {
                 .toPact()
     }
 
-    @PactTestFor(pactMethod = "pact_favourite_a_product")
-    @Test
+//    @PactTestFor(pactMethod = "pact_favourite_a_product")
+//    @Test
     fun favourite_a_product(mockServer: MockServer) {
         catalogClient.favouriteProduct(10)
     }

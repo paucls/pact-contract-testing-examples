@@ -1,19 +1,25 @@
 package paucls.pactworkshop.frontend.client
 
-import org.springframework.cloud.openfeign.FeignClient
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.web.client.RestTemplateBuilder
+import org.springframework.stereotype.Component
+import org.springframework.web.client.RestTemplate
 
-@FeignClient(name = "catalog", url = "\${CATALOG_BASE_URL}")
-interface CatalogClient {
+@Component
+class CatalogClient(restTemplateBuilder: RestTemplateBuilder,
+                    @Value("\${CATALOG_BASE_URL}") catalogBaseUrl: String) {
 
-    @RequestMapping(method = [RequestMethod.GET], value = ["/products"])
-    fun getAllProducts(): List<Product>
+    private var restTemplate: RestTemplate = restTemplateBuilder.rootUri(catalogBaseUrl).build()
 
-    @RequestMapping(method = [RequestMethod.GET], value = ["/products/{id}"])
-    fun getProduct(@PathVariable("id") id: Int): Product
+    fun getAllProducts(): List<Product> {
+        return restTemplate.getForEntity("/products", Array<Product>::class.java).body!!.toList()
+    }
 
-    @RequestMapping(method = [RequestMethod.POST], value = ["/products/{id}/favourite"])
-    fun favouriteProduct(@PathVariable("id") id: Int)
+    fun getProduct(id: Int): Product {
+        return restTemplate.getForEntity("/products/$id", Product::class.java).body!!
+    }
+
+    fun favouriteProduct(id: Int) {
+        restTemplate.postForLocation("/products/{id}/favourite", null, id)
+    }
 }
