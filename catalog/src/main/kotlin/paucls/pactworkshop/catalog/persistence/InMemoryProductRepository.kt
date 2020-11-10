@@ -12,9 +12,10 @@ import paucls.pactworkshop.catalog.app.ProductRepository
 class InMemoryProductRepository : ProductRepository {
 
     private val products = listOf(
-            Product(id = 0, name = "Gem Visa", type = "CREDIT_CARD", availability = ProductAvailability.InStock),
-            Product(id = 1, name = "28 Degrees", type = "CREDIT_CARD", availability = ProductAvailability.InStock),
-            Product(id = 2, name = "MyFlexiPay", type = "PERSONAL_LOAN", availability = ProductAvailability.OutOfStock))
+            Product(id = 0, name = "Permanent Marker", type = "STATIONERY", availability = ProductAvailability.InStock),
+            Product(id = 1, name = "Colored Pencils Set", type = "STATIONERY", availability = ProductAvailability.OutOfStock),
+            Product(id = 2, name = "Desk Phone", type = "ELECTRONICS", availability = ProductAvailability.InStock),
+            Product(id = 3, name = "USB Headphones", type = "ELECTRONICS", availability = ProductAvailability.OutOfStock))
 
     override fun getAllProducts(): List<Product> {
         return products

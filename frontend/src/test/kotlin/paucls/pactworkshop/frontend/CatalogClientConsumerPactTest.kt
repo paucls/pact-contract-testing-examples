@@ -34,8 +34,8 @@ class CatalogClientConsumerPactTest {
         val responseBody = PactDslJsonArray
                 .arrayMinLike(1)
                 .integerType("id", 123)
-                .stringType("type", "CREDIT_CARD")
-                .stringType("name", "Mastercard")
+                .stringType("type", "STATIONERY")
+                .stringType("name", "Permanent Marker")
                 .stringValue("availability", "InStock")
                 .close()
 
@@ -58,8 +58,8 @@ class CatalogClientConsumerPactTest {
 
         assertThat(products).hasSize(1)
         assertThat(products[0].id).isEqualTo(123)
-        assertThat(products[0].name).isEqualTo("Mastercard")
-        assertThat(products[0].type).isEqualTo("CREDIT_CARD")
+        assertThat(products[0].name).isEqualTo("Permanent Marker")
+        assertThat(products[0].type).isEqualTo("STATIONERY")
         assertThat(products[0].availability).isEqualTo(InStock)
     }
 
@@ -67,8 +67,8 @@ class CatalogClientConsumerPactTest {
     fun pact_get_one_product_when_product_exists(builder: PactDslWithProvider): RequestResponsePact {
         val responseBody = PactDslJsonBody()
                 .integerType("id", 10)
-                .stringType("type", "CREDIT_CARD")
-                .stringType("name", "28 Degrees")
+                .stringType("type", "STATIONERY")
+                .stringType("name", "Colored Pencils Set")
                 .stringValue("availability", "OutOfStock")
                 .close()
 
@@ -90,8 +90,8 @@ class CatalogClientConsumerPactTest {
         val product = catalogClient.getProduct(10)
 
         assertThat(product.id).isEqualTo(10)
-        assertThat(product.type).isEqualTo("CREDIT_CARD")
-        assertThat(product.name).isEqualTo("28 Degrees")
+        assertThat(product.type).isEqualTo("STATIONERY")
+        assertThat(product.name).isEqualTo("Colored Pencils Set")
         assertThat(product.availability).isEqualTo(OutOfStock)
     }
 

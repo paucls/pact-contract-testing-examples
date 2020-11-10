@@ -39,8 +39,8 @@ class CatalogClientTest {
     fun get_all_products_when_products_exist() {
         val json = jacksonObjectMapper().writeValueAsString(listOf(Product(
                 id = 123,
-                type = "CREDIT_CARD",
-                name = "Mastercard",
+                type = "STATIONERY",
+                name = "Permanent Marker",
                 availability = ProductAvailability.InStock)))
         mockRestServiceServer
                 .expect(requestTo("/products"))
@@ -50,8 +50,8 @@ class CatalogClientTest {
 
         assertThat(products).hasSize(1)
         assertThat(products[0].id).isEqualTo(123)
-        assertThat(products[0].name).isEqualTo("Mastercard")
-        assertThat(products[0].type).isEqualTo("CREDIT_CARD")
+        assertThat(products[0].name).isEqualTo("Permanent Marker")
+        assertThat(products[0].type).isEqualTo("STATIONERY")
         assertThat(products[0].availability).isEqualTo(ProductAvailability.InStock)
     }
 
@@ -59,8 +59,8 @@ class CatalogClientTest {
     fun get_one_product_when_product_exists() {
         val json = jacksonObjectMapper().writeValueAsString(Product(
                 id = 10,
-                type = "CREDIT_CARD",
-                name = "28 Degrees",
+                type = "STATIONERY",
+                name = "Colored Pencils Set",
                 availability = ProductAvailability.OutOfStock))
         mockRestServiceServer
                 .expect(requestTo("/products/10"))
@@ -69,8 +69,8 @@ class CatalogClientTest {
         val product = catalogClient.getProduct(10)
 
         assertThat(product.id).isEqualTo(10)
-        assertThat(product.type).isEqualTo("CREDIT_CARD")
-        assertThat(product.name).isEqualTo("28 Degrees")
+        assertThat(product.type).isEqualTo("STATIONERY")
+        assertThat(product.name).isEqualTo("Colored Pencils Set")
         assertThat(product.availability).isEqualTo(ProductAvailability.OutOfStock)
     }
 

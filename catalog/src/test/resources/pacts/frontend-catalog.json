@@ -7,32 +7,6 @@
   },
   "interactions": [
     {
-      "description": "a request to favourite a product",
-      "request": {
-        "method": "POST",
-        "path": "/products/10/favourite",
-        "matchingRules": {
-          "path": {
-            "matchers": [
-              {
-                "match": "regex",
-                "regex": "/products/10/favourite"
-              }
-            ],
-            "combine": "AND"
-          }
-        }
-      },
-      "response": {
-        "status": 204
-      },
-      "providerStates": [
-        {
-          "name": "product with id 10 exists"
-        }
-      ]
-    },
-    {
       "description": "a request to get one product",
       "request": {
         "method": "GET",
@@ -55,10 +29,10 @@
           "Content-Type": "application/json"
         },
         "body": {
-          "name": "28 Degrees",
+          "name": "Colored Pencils Set",
           "id": 10,
           "availability": "OutOfStock",
-          "type": "CREDIT_CARD"
+          "type": "STATIONERY"
         },
         "matchingRules": {
           "body": {
@@ -119,10 +93,10 @@
         },
         "body": [
           {
-            "name": "Mastercard",
+            "name": "Permanent Marker",
             "id": 123,
             "availability": "InStock",
-            "type": "CREDIT_CARD"
+            "type": "STATIONERY"
           }
         ],
         "matchingRules": {

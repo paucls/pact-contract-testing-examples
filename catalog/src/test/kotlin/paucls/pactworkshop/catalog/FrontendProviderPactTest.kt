@@ -40,13 +40,13 @@ class FrontendProviderPactTest {
     @State("products exist")
     fun products_exists() {
         whenever(productServiceMock.getAllProducts()).thenReturn(
-                listOf(Product(id = 123, name = "Mastercard", type = "CREDIT_CARD", availability = InStock)))
+                listOf(Product(id = 123, name = "Permanent Marker", type = "STATIONERY", availability = InStock)))
     }
 
     @State("product with id 10 exists")
     fun product_with_id_10_exists() {
         whenever(productServiceMock.getProduct(10)).thenReturn(
-                Product(id = 10, name = "28 Degrees", type = "CREDIT_CARD", availability = OutOfStock)
+                Product(id = 10, name = "Colored Pencils Set", type = "STATIONERY", availability = OutOfStock)
         )
     }
 }
