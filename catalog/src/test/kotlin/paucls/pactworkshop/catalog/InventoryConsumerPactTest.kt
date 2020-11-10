@@ -16,14 +16,14 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import paucls.pactworkshop.catalog.app.ProductService
 import paucls.pactworkshop.catalog.messaging.ProductInventoryChangedDto
-import paucls.pactworkshop.catalog.messaging.ProductStockChangedHandler
+import paucls.pactworkshop.catalog.messaging.ProductInventoryChangedHandler
 
 @ExtendWith(PactConsumerTestExt::class)
 @PactTestFor(providerName = "inventory", providerType = ProviderType.ASYNCH)
 class InventoryConsumerPactTest {
 
     private val productServiceMock: ProductService = mock()
-    private val handler = ProductStockChangedHandler(productServiceMock)
+    private val handler = ProductInventoryChangedHandler(productServiceMock)
 
     @Pact(consumer = "catalog")
     fun pact_product_inventory_changed(builder: MessagePactBuilder): MessagePact {

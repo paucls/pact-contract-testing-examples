@@ -30,15 +30,15 @@ class CatalogProviderPactTest {
         context.target = testTarget
     }
 
-    @State("a product goes out of stock or is back in stock")
-    fun `a product goes out of stock or is back in stock`() {
+    @State("a product inventory level has changed")
+    fun `a product inventory level has changed`() {
     }
 
-    @PactVerifyProvider("product stock changed message")
+    @PactVerifyProvider("product inventory changed message")
     fun verifyEntitiesCreatedMessage(): String {
         val message = ProductInventoryChangedDto(
                 productId = 10,
-                isInStock = true)
+                quantity = 1000)
         return jacksonObjectMapper().writeValueAsString(message)
     }
 }

@@ -12,9 +12,9 @@ import paucls.pactworkshop.catalog.app.ProductService
 
 
 @Component
-class ProductStockChangedHandler(private val productService: ProductService) {
+class ProductInventoryChangedHandler(private val productService: ProductService) {
 
-    private val logger: Logger = LogManager.getLogger(ProductStockChangedHandler::class.java)
+    private val logger: Logger = LogManager.getLogger(ProductInventoryChangedHandler::class.java)
 
     @RabbitListener(
             bindings = [(QueueBinding(
