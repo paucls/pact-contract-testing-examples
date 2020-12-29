@@ -4,7 +4,7 @@ import au.com.dius.pact.provider.junit5.PactVerificationContext
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider
 import au.com.dius.pact.provider.junitsupport.Provider
 import au.com.dius.pact.provider.junitsupport.State
-import au.com.dius.pact.provider.junitsupport.loader.PactFolder
+import au.com.dius.pact.provider.junitsupport.loader.PactBroker
 import au.com.dius.pact.provider.spring.junit5.MockMvcTestTarget
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -19,7 +19,7 @@ import paucls.pactworkshop.catalog.app.ProductService
 
 
 @Provider("catalog")
-@PactFolder("pacts")
+@PactBroker(host = "localhost", port = "8000")
 class FrontendProviderPactTest {
 
     private val productServiceMock: ProductService = mock()
