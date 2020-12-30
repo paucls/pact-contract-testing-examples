@@ -53,4 +53,7 @@ pact {
 	publish {
 		pactBrokerUrl = "http://localhost:8000"
 	}
+	broker {
+		pactBrokerUrl = "http://localhost:8000"
+	}
 }

@@ -37,6 +37,17 @@ $ docker-compose -f docker-compose-broker.yml up
 
 Open the broker url http://localhost:8000/
 
+## Consumer publishes pact to broker
+```
+./gradlew pactPublish
+```
+
+## Check with broker if service can be deployed
+```
+cd frontend
+./gradlew canideploy -Ppacticipant='catalog' -Platest=true
+```
+
 ## References
 - https://docs.pact.io/implementation_guides/jvm/consumer/junit5
 - https://docs.pact.io/implementation_guides/jvm/provider/junit5spring

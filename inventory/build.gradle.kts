@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
+	id("au.com.dius.pact") version "4.1.0"
 }
 
 group = "paucls.pactworkshop"
@@ -38,5 +39,11 @@ tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "11"
+	}
+}
+
+pact {
+	broker {
+		pactBrokerUrl = "http://localhost:8000"
 	}
 }
