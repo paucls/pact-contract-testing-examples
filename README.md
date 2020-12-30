@@ -28,6 +28,15 @@ $ frontend/gradlew -p frontend bootRun
 
 Open in the browser http://localhost:8080/
 
+## Running the demo Pact Broker
+
+In a terminal start the dockerized pact broker.
+```
+$ docker-compose -f docker-compose-broker.yml up
+```
+
+Open the broker url http://localhost:8000/
+
 ## References
 - https://docs.pact.io/implementation_guides/jvm/consumer/junit5
 - https://docs.pact.io/implementation_guides/jvm/provider/junit5spring
