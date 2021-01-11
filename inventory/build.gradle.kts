@@ -44,6 +44,6 @@ tasks.withType<KotlinCompile> {
 
 pact {
 	broker {
-		pactBrokerUrl = "http://localhost:8000"
+		pactBrokerUrl = "http://localhost:9292"
 	}
 }

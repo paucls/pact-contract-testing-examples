@@ -15,7 +15,7 @@ import paucls.pactworkshop.inventory.messaging.ProductInventoryChangedDto
 
 
 @Provider("inventory")
-@PactBroker(host = "localhost", port = "8000")
+@PactBroker(host = "localhost", port = "9292")
 class CatalogProviderPactTest {
 
     @TestTemplate

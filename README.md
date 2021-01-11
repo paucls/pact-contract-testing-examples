@@ -29,13 +29,12 @@ $ frontend/gradlew -p frontend bootRun
 Open in the browser http://localhost:8080/
 
 ## Running the demo Pact Broker
-
-In a terminal start the dockerized pact broker.
+In a terminal start the [dockerized pact broker](https://hub.docker.com/r/pactfoundation/pact-broker/).
 ```
 $ docker-compose -f docker-compose-broker.yml up
 ```
 
-Open the broker url http://localhost:8000/
+Open the broker url http://localhost:9292/
 
 ## Consumer publishes pact to broker
 ```
