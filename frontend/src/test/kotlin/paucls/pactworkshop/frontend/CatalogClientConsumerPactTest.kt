@@ -93,4 +93,22 @@ class CatalogClientConsumerPactTest {
         assertThat(product.name).isEqualTo("Colored Pencils Set")
         assertThat(product.availability).isEqualTo(OutOfStock)
     }
+
+    @Pact(consumer = "frontend")
+    fun pact_favourite_a_product(builder: PactDslWithProvider): RequestResponsePact {
+        return builder
+                .given("product with id 10 exists")
+                .uponReceiving("a request to favourite a product")
+                .method("POST")
+                .matchPath("/products/10/favourite")
+                .willRespondWith()
+                .status(204)
+                .toPact()
+    }
+
+    @PactTestFor(pactMethod = "pact_favourite_a_product")
+    @Test
+    fun favourite_a_product(mockServer: MockServer) {
+        catalogClient.favouriteProduct(10)
+    }
 }

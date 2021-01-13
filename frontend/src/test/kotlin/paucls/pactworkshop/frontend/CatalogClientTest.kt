@@ -4,6 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest
@@ -35,6 +36,7 @@ class CatalogClientTest {
         mockRestServiceServer.verify()
     }
 
+    @Disabled
     @Test
     fun get_all_products_when_products_exist() {
         val json = jacksonObjectMapper().writeValueAsString(listOf(Product(
@@ -55,6 +57,7 @@ class CatalogClientTest {
         assertThat(products[0].availability).isEqualTo(ProductAvailability.InStock)
     }
 
+    @Disabled
     @Test
     fun get_one_product_when_product_exists() {
         val json = jacksonObjectMapper().writeValueAsString(Product(
@@ -74,6 +77,7 @@ class CatalogClientTest {
         assertThat(product.availability).isEqualTo(ProductAvailability.OutOfStock)
     }
 
+    @Disabled
     @Test
     fun favourite_a_product() {
         mockRestServiceServer

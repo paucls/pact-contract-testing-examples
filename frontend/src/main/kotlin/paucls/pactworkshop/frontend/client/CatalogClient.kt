@@ -1,25 +1,23 @@
 package paucls.pactworkshop.frontend.client
 
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 
 @Component
-class CatalogClient(restTemplateBuilder: RestTemplateBuilder,
-                    @Value("\${CATALOG_BASE_URL}") catalogBaseUrl: String) {
+class CatalogClient(@Value("\${CATALOG_BASE_URL}") private val catalogBaseUrl: String) {
 
-    private var restTemplate: RestTemplate = restTemplateBuilder.rootUri(catalogBaseUrl).build()
+    private val restTemplate = RestTemplate()
 
     fun getAllProducts(): List<Product> {
-        return restTemplate.getForEntity("/products", Array<Product>::class.java).body!!.toList()
+        return restTemplate.getForEntity("$catalogBaseUrl/products", Array<Product>::class.java).body!!.toList()
     }
 
     fun getProduct(id: Int): Product {
-        return restTemplate.getForEntity("/products/$id", Product::class.java).body!!
+        return restTemplate.getForEntity("$catalogBaseUrl/products/$id", Product::class.java).body!!
     }
 
     fun favouriteProduct(id: Int) {
-        restTemplate.postForLocation("/products/$id/favourite", null)
+        restTemplate.postForLocation("$catalogBaseUrl/products/{id}/favourite", null, id)
     }
 }
