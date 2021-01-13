@@ -20,6 +20,6 @@ class CatalogClient(restTemplateBuilder: RestTemplateBuilder,
     }
 
     fun favouriteProduct(id: Int) {
-        restTemplate.postForLocation("/products/{id}/favourite", null, id)
+        restTemplate.postForLocation("/products/$id/favourite", null)
     }
 }
