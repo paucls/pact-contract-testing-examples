@@ -69,6 +69,7 @@ class CatalogClientConsumerPactTest {
                 .stringType("type", "STATIONERY")
                 .stringType("name", "Colored Pencils Set")
                 .stringValue("availability", "OutOfStock")
+                .booleanType("isFavouriteProduct", true)
                 .close()
 
         return builder
@@ -92,6 +93,7 @@ class CatalogClientConsumerPactTest {
         assertThat(product.type).isEqualTo("STATIONERY")
         assertThat(product.name).isEqualTo("Colored Pencils Set")
         assertThat(product.availability).isEqualTo(OutOfStock)
+        assertThat(product.isFavouriteProduct).isTrue()
     }
 
     @Pact(consumer = "frontend")
