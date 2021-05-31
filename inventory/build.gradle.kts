@@ -1,15 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.3.4.RELEASE"
-	id("io.spring.dependency-management") version "1.0.10.RELEASE"
-	kotlin("jvm") version "1.3.72"
-	kotlin("plugin.spring") version "1.3.72"
+	id("org.springframework.boot") version "2.4.6"
+	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	kotlin("jvm") version "1.4.32"
+	kotlin("plugin.spring") version "1.4.32"
 }
 
 group = "paucls.pactworkshop"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
 	mavenCentral()
@@ -25,8 +25,8 @@ dependencies {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
-	testImplementation("au.com.dius.pact.provider:junit5:4.1.0")
-	testImplementation("au.com.dius.pact.provider:junit5spring:4.1.9")
+	testImplementation("au.com.dius.pact.consumer:junit5:4.1.21")
+	testImplementation("au.com.dius.pact.provider:junit5spring:4.1.21")
 	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 }
 
@@ -37,6 +37,6 @@ tasks.withType<Test> {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+		jvmTarget = "1.8"
 	}
 }
