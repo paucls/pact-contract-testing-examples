@@ -34,6 +34,8 @@ class FrontendProviderPactTest {
     fun before(context: PactVerificationContext) {
         val testTarget = MockMvcTestTarget()
         testTarget.setControllers(ProductController(productServiceMock))
+        // see debug logs that include the request and response details
+        testTarget.printRequestResponse = true
         context.target = testTarget
     }
 
